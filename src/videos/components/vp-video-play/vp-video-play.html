@@ -1,0 +1,72 @@
+<md-card class="vp-video-play">
+  <md-card-actions layout="row" layout-align="end start" ng-if="$ctrl.selectedVideo.video_id" ng-click="$ctrl.isEditMode = !$ctrl.isEditMode">
+    <md-button class="vp-video-play__edit-btn">
+      edit
+    </md-button>
+  </md-card-actions>
+  <md-card-content>
+    <videogular vg-theme="$ctrl.config.theme" vg-player-ready="$ctrl.onPlayerReady($API)">
+      <vg-media vg-src="$ctrl.config.sources"
+                vg-tracks="$ctrl.config.tracks">
+      </vg-media>
+      <vg-controls>
+        <vg-play-pause-button></vg-play-pause-button>
+        <vg-time-display ng-hide="$ctrl.selectedVideo.video_id">{{ currentTime | date:'mm:ss' }}</vg-time-display>
+        <vg-scrub-bar>
+          <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        </vg-scrub-bar>
+        <vg-time-display ng-hide="$ctrl.selectedVideo.video_id">{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+        <vg-volume>
+          <vg-mute-button></vg-mute-button>
+          <vg-volume-bar></vg-volume-bar>
+        </vg-volume>
+        <vg-fullscreen-button></vg-fullscreen-button>
+      </vg-controls>
+      <my-replay-plugin></my-replay-plugin>
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
+      <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+    </videogular>
+
+    <form name="editVideoForm" ng-submit="$ctrl.saveClip()" layout="column" ng-show="$ctrl.isEditMode">
+      <div layout="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" ng-model="$ctrl.selectedVideo.name" required>
+          <div ng-messages="editVideoForm.name.$error">
+            <div ng-message="required">This field is required</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="description">Description</label>
+          <input type="text" name="description" id="description" ng-model="$ctrl.selectedVideo.description">
+        </md-input-container>
+      </div>
+      <div layout="row" ng-if="$ctrl.selectedVideoIndex !== 0">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="startTime">Start Time</label>
+          <input type="text" id="startTime" name="startTime" ng-model="$ctrl.selectedVideo.start_time" ui-mask="99:99" ui-options="{addDefaultPlaceholder: false}" required>
+          <div ng-messages="editVideoForm.startTime.$error">
+            <div ng-message="required">This field is required</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="endTime">End Time</label>
+          <input type="text" id="endTime" name="endTime" ng-model="$ctrl.selectedVideo.end_time" vp-validate-greater-than="$ctrl.selectedVideo.start_time" ui-mask="99:99" ui-options="{addDefaultPlaceholder: false}" required>
+          <div ng-messages="editVideoForm.endTime.$error">
+            <div ng-message="required">This field is required</div>
+            <div ng-message="vpGreaterThan">End Time should be greater than Start Time</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout="row">
+        <md-button type="submit" class="md-primary md-raised" ng-disabled="editVideoForm.$invalid">
+          Save
+        </md-button>
+        <md-button ng-click="$ctrl.cancelEditing(editVideoForm)">
+          Cancel
+        </md-button>
+      </div>
+    </form>
+  </md-card-content>
+</md-card>
