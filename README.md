@@ -12,7 +12,19 @@ This project is built with the following main technologies:
   - Angular Material 1.0.x
 ```
 and is written with ES6 version of JavaScript. The project follows recommended uni-directional data flow for the components.
-Local Storage is used for data persistence. 
+Local Storage is used for data persistence.
+
+Features
+--------
+
+- [x] Ability to add a video
+- [x] Ability to add a clip for the video
+- [x] Ability to select clips and remove them
+- [x] Ability to watch video and clips
+- [x] Ability to update clip's attributes
+- [x] Show markers on the video player timeline for the full video
+- [x] Validation for time inputs
+- [x] Data persistence (using Local Storage)
 
 Installation
 ------------
@@ -41,19 +53,6 @@ Dev mode:
 npm run test-dev
 ```
 
-Progress
---------
-
-Done:
-
-- [x] Ability to add a video
-- [x] Ability to add a clip for the video
-- [x] Ability to select clips and remove them
-- [x] Ability to watch video and clips
-- [x] Ability to update clip's attributes
-- [x] Show markers on the video player timeline for the full video
-- [x] Validation for time inputs
-- [x] Data persistence (using Local Storage)
 
 License
 -------
