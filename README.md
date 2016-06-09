@@ -1,10 +1,10 @@
-# video-player-app
+# Angular Challenge made by Vitaly Tkachenko
 
 [![Build Status](https://travis-ci.org/m0t0r/video-player-app.svg?branch=master)](https://travis-ci.org/m0t0r/video-player-app)
 
 About
 -----
-This application represents HTML5 video player which allows users to add videos for watching and create clips from full video.
+This application represents an HTML5 video player which allows users to add videos for watching and create clips from full video.
 This project is built with the following main technologies:
 
 ```
